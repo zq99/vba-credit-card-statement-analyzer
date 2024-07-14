@@ -37,7 +37,7 @@ This VBA Excel application allows users to import a CSV file of credit card or b
    - The pivot tables will be available on the `Import` sheet for your analysis.
 
 4. **Example File:**
-   - The repository includes a dummy CSV file named `example_statement.csv` so you can see how the application works.
+   - The repository includes a dummy CSV file named `example_statement.csv` (generated using ChatGPT) so you can see how the application/code works.
 
 ## License
 
