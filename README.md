@@ -3,7 +3,7 @@
 
 ## Overview
 
-This VBA Excel application allows users to import a CSV file of credit card or bank transactions, and then generate basic pivot table reports for analysis. The application provides an easy-to-use interface with a button on the "Import" sheet that automates the import process and create dynamic pivot table reports.
+This VBA Excel application allows users to import a CSV file of credit card or bank transactions, and then generate basic pivot table reports for analysis. The application provides an easy-to-use interface with a button on the "Import" sheet that automates the import process and creates dynamic pivot table reports.
 
 ## Features
 
