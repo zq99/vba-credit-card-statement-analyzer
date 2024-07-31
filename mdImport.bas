@@ -174,6 +174,8 @@ Private Sub LoadFile(ByVal sFile As String)
         End If
         
         Call AddCSVToSheet(STR_SHEET_NAME, sFile, blnExcludeHeader)
+        
+        Call SortData
     
     End If
 
@@ -184,6 +186,48 @@ Exit_here:
     ClearObjects oState
     
 End Sub
+
+
+Private Sub SortData()
+    
+On Error GoTo err_handler:
+
+    Dim ws As Worksheet
+    Dim lngLastRow As Long
+    Dim strSortKeyColumnAddress As String
+    Dim strSortRangeAddress As String
+    
+    Set ws = ThisWorkbook.Worksheets(STR_SHEET_NAME)
+    
+    lngLastRow = ws.Cells(ws.Rows.Count, STR_DATA_COLUMN_TRANSACTION_DATE).End(xlUp).Row
+    
+    strSortKeyColumnAddress = "A5:A" & lngLastRow
+    strSortRangeAddress = "A4:K" & lngLastRow
+
+    ws.Sort.SortFields.Clear
+
+    ws.Sort.SortFields.Add Key:=ws.Range(strSortKeyColumnAddress), SortOn:=xlSortOnValues, order:=xlDescending, DataOption:=xlSortNormal
+
+    With ws.Sort
+        .SetRange ws.Range(strSortRangeAddress)
+        .header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+
+Exit_here:
+
+    ClearObjects ws
+    Exit Sub
+
+err_handler:
+
+    GoTo Exit_here
+    
+End Sub
+
 
 
 Private Sub AddCSVToSheet(ByVal strShtName As String, ByVal file As String, ByVal blnExcludeHeader As Boolean, Optional ByVal adjustColumns As Boolean = True)

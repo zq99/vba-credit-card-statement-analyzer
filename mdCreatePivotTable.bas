@@ -123,6 +123,7 @@ Public Sub CreateByDayPivotTableReport(ByVal rngdataRange As Range, ByVal wsPivo
     pvtCreator.AddValueField "Amount", xlAverage, "Avg Spent"
     pvtCreator.AddValueField "Greater_than_10", xlSum, "Large Spend Count"
     pvtCreator.AddFilterField "Filename"
+    pvtCreator.AddFilterField "Type"
     
     ' Create the pivot table
     pvtCreator.CreatePivotTable

@@ -54,6 +54,7 @@ Public Function ImportCSVtoSheet(ByVal csvFilePath As String, ByVal outputSheetN
     Dim lastColumn As Long
     Dim csvDataRange As Range
     Dim firstDataRow As Long
+    Dim cell As Range
 
     Call CaptureState
 
@@ -74,6 +75,13 @@ Public Function ImportCSVtoSheet(ByVal csvFilePath As String, ByVal outputSheetN
     With outputWorksheet
         .Range(.Cells(startRow, 1), .Cells(startRow + csvDataRange.Rows.Count, 2)).NumberFormat = "@"
         .Cells(startRow, 1).Resize(csvDataRange.Rows.Count, csvDataRange.Columns.Count).value = csvDataRange.value
+        
+        For Each cell In .Range(.Cells(startRow, 1), .Cells(startRow + csvDataRange.Rows.Count, 2))
+            If IsDate(cell.value) Then
+                cell.value = Format(cell.value, "YYYY-MM-DD")
+            End If
+        Next cell
+        
     End With
     
     tempWorkbook.Close False
@@ -90,7 +98,7 @@ ErrorHandler:
 
 ExitHere:
     
-    ClearObjects csvDataRange, tempWorksheet, tempWorkbook, outputWorksheet
+    ClearObjects csvDataRange, tempWorksheet, tempWorkbook, outputWorksheet, cell
 
     Call RestoreState
 
